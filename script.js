@@ -1,44 +1,44 @@
 let resolveData = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve([1, 2, 3, 4]);
-    }, 3000); // Resolving initial data after 3 seconds
-});
+            setTimeout(() => {
+                resolve([1, 2, 3, 4]);
+            }, 3000);  // Resolve after 3 seconds
+        });
 
-let evenData = (data) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            let evenNum = data.filter(e => e % 2 === 0);
-            // Update the output with even numbers
-            document.getElementById("output").innerText = `Even numbers: ${evenNum.join(", ")}`;
-            resolve(evenNum);
-        }, 1000);  // 1-second delay to filter even numbers
-    });
-};
+        // Function to filter out even numbers
+        let evenData = data => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let evenNum = data.filter(e => e % 2 == 0);
+                    document.getElementById("output").innerText = evenNum.join(", "); // Display even numbers
+                    resolve(evenNum);
+                }, 1000);  // After 1 second
+            });
+        };
 
-let multiplyData = (data) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            let multiplyNum = data.map(e => e * 2);
-            // Update the output with multiplied numbers
-            document.getElementById("output").innerText = `Multiplied numbers: ${multiplyNum.join(", ")}`;
-            resolve(multiplyNum);
-        }, 2000);  // 2-second delay to multiply even numbers by 2
-    });
-};
+        // Function to multiply even numbers by 2
+        let multiplyData = data => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let multiplyNum = data.map(e => e * 2);
+                    document.getElementById("output").innerText = multiplyNum.join(", "); // Display doubled values
+                    resolve(multiplyNum);
+                }, 2000);  // After 2 seconds
+            });
+        };
 
-// Chaining the promises
-resolveData
-    .then(data => {
-        console.log("Initial data:", data);
-        return evenData(data);  // Filter out even numbers
-    })
-    .then(data => {
-        console.log("Even numbers:", data);
-        return multiplyData(data);  // Multiply even numbers by 2
-    })
-    .then(data => {
-        console.log("Final result:", data);
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
+        // Chain the promises: Resolve initial data -> filter evens -> multiply by 2
+        resolveData
+            .then(data => {
+                console.log(data);  // Log initial data
+                return evenData(data);  // Filter even numbers
+            })
+            .then(data => {
+                console.log(data);  // Log even numbers
+                return multiplyData(data);  // Multiply even numbers by 2
+            })
+            .then(data => {
+                console.log(data);  // Log final data
+            })
+            .catch(error => {
+                console.error(error);
+            });
