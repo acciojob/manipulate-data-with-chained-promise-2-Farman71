@@ -31,12 +31,7 @@ resolveData
     })
     .then((data) => {
         console.log(data);  // Log even numbers
-        // Return a new promise that waits for 1 second before calling multiplyData
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(multiplyData(data));
-            }, 1000); // Wait for 1 second
-        });
+        return multiplyData(data);  // Multiply numbers by 2
     })
     .then((data) => {
         console.log(data);  // Log final transformed data
