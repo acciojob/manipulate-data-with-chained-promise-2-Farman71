@@ -1,10 +1,9 @@
 let resolveData = new Promise((resolve, reject) => {
     setTimeout(() => {
         resolve([1, 2, 3, 4]);
-    }, 3000);  // Resolve after 3 seconds
+    }, 0);  // Resolve immediately
 });
 
-// Function to filter out even numbers
 let evenData = (data) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -15,18 +14,16 @@ let evenData = (data) => {
     });
 };
 
-// Function to multiply even numbers by 2
 let multiplyData = (data) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             let multiplyNum = data.map(e => e * 2);
             document.getElementById("output").innerText = multiplyNum.join(", "); // Display doubled values
             resolve(multiplyNum);
-        }, 2000);  // After 2 seconds
+        }, 1000);  // After 1 more second
     });
 };
 
-// Chain the promises correctly
 resolveData
     .then((data) => {
         console.log(data);  // Log initial data
@@ -34,11 +31,11 @@ resolveData
     })
     .then((data) => {
         console.log(data);  // Log even numbers
-        // Return a new promise that waits for 2 seconds before calling multiplyData
+        // Return a new promise that waits for 1 second before calling multiplyData
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(multiplyData(data));
-            }, 2000); // Wait for 2 seconds
+            }, 1000); // Wait for 1 second
         });
     })
     .then((data) => {
