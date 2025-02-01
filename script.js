@@ -1,26 +1,25 @@
 function manipulateData() {
     return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve([1, 2, 3, 4]);
-        }, 3000);
+        resolve([1, 2, 3, 4]);
     })
     .then((data) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve(data.filter((num) => num % 2 === 0));
+                const evenNum = data.filter((num) => num % 2 === 0);
+                document.getElementById('output').innerText = evenNum.join(", ");
+                resolve(evenNum);
             }, 1000);
         });
     })
     .then((data) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve(data.map((num) => num * 2));
+                const multipliedNum = data.map((num) => num * 2);
+                document.getElementById('output').innerText = multipliedNum.join(", ");
+                resolve(multipliedNum);
             }, 2000);
         });
     });
 }
 
-manipulateData()
-    .then((data) => {
-        document.getElementById('output').innerText = data.join(",");
-    });
+manipulateData();
