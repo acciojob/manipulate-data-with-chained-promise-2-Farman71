@@ -20,7 +20,7 @@ let multiplyData = (data) => {
             let multiplyNum = data.map(e => e * 2);
             document.getElementById("output").innerText = multiplyNum.join(", "); // Display doubled values
             resolve(multiplyNum);
-        }, 2000);  // After 2 more seconds
+        }, 1000);  // After 1 more second
     });
 };
 
